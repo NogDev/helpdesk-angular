@@ -32,7 +32,7 @@ export class TicketService {
     return this.http.delete(`${HELP_DESK_API}/api/ticket/${id}`);
   }
 
-  findByParams(page: number, count: number, assignedToMe: boolean, t: Ticket){
+  findByParams(page: number, count: number, assignedToMe: boolean, t: Ticket) {
     t.number = t.number == null ? 0 : t.number;
     t.title = t.title == '' ? "uninformed" : t.title;
     t.status = t.status == '' ? "uninformed" : t.status;
@@ -40,11 +40,11 @@ export class TicketService {
     return this.http.get(`${HELP_DESK_API}/api/ticket/${page}/${count}/${t.number}/${t.title}/${t.status}/${t.priority}/${assignedToMe}`);
   }
 
-  changeStatus(status:string,ticket:Ticket){
-    return this.http.put(`${HELP_DESK_API}/api/ticket/${ticket.id}/${status}`,ticket);
+  changeStatus(status: string, ticket: Ticket) {
+    return this.http.put(`${HELP_DESK_API}/api/ticket/${ticket.id}/${status}`, ticket);
   }
 
-  summary(){
+  summary() {
     return this.http.get(`${HELP_DESK_API}/api/ticket/summary`);
   }
 
