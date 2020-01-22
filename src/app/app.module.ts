@@ -1,4 +1,6 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './components/security/auth.guard';
+import { AuthInterceptor } from './components/security/auth.interceptor';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedService } from './services/shared.service';
 import { UserService } from './services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,7 +33,15 @@ import { routes } from './app.routes';
     HttpClientModule,
     routes
   ],
-  providers: [UserService, SharedService],
+  providers: [
+    UserService,
+    SharedService,
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
