@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  page: number=0;
+  page:number=0;
   count:number=5;
   pages:Array<number>;
   shared : SharedService;
@@ -28,7 +28,7 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.findAll(this.page, this.count);
+    this.findAll(this.page,this.count);
   }
 
   findAll(page:number,count:number){
@@ -44,21 +44,21 @@ export class UserListComponent implements OnInit {
 
   }
 
-  edit(id: string){
-    this.router.navigate(['/user-new', id]);
+  edit(id:string){
+    this.router.navigate(['/user-new',id]);
   }
 
-  delete(id: string) {
+  delete(id:string){
     this.dialogService.confirm('Do you want to delete the email ?')
-      .then((candelete: boolean) => {
-          if (candelete) {
+      .then((candelete:boolean) => {
+          if(candelete){
             this.message = {};
-            this.userService.delete(id).subscribe((responseApi: ResponseApi) => {
+            this.userService.delete(id).subscribe((responseApi:ResponseApi) => {
                 this.showMessage({
                   type: 'success',
                   text: `Record deleted`
                 });
-                this.findAll(this.page, this.count);
+                this.findAll(this.page,this.count);
             } , err => {
               this.showMessage({
                 type: 'error',
@@ -69,23 +69,23 @@ export class UserListComponent implements OnInit {
       });
   }
 
-  setNextPage(event: any) {
+  setNextPage(event:any){
     event.preventDefault();
-    if (this.page + 1 < this.pages.length) {
-      this.page =  this.page + 1;
-      this.findAll(this.page, this.count);
+    if(this.page+1 < this.pages.length){
+      this.page =  this.page +1;
+      this.findAll(this.page,this.count);
     }
   }
 
-  setPreviousPage(event: any) {
+  setPreviousPage(event:any){
     event.preventDefault();
-    if (this.page > 0) {
+    if(this.page > 0){
       this.page =  this.page - 1;
-      this.findAll(this.page, this.count);
+      this.findAll(this.page,this.count);
     }
   }
 
-  setPage(i, event: any) {
+  setPage(i, event: any){
     event.preventDefault();
     this.page = i;
     this.findAll(this.page, this.count);
@@ -103,7 +103,7 @@ export class UserListComponent implements OnInit {
     this.classCss = {
       'alert': true
     }
-    this.classCss['alert-'+ type] =  true;
+    this.classCss['alert-'+type] =  true;
   }
   
 }
